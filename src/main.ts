@@ -198,3 +198,21 @@ console.log("New wizard:", luna);
 
 // Vérifier que le sorcier est enregistré
 console.log("Saved wizard:", wizards.findById(luna.id));
+// =====================================
+// EXERCICE 2 : FIND WIZARDS BY HOUSE
+// =====================================
+
+// Afficher le titre de l'exercice
+console.log("\n--- Exercise 2: Find Wizards by House ---");
+
+// Rechercher les sorciers de Gryffindor
+console.log("Gryffindor:", wizards.findByHouse("Gryffindor"));
+
+// Rechercher les sorciers de Slytherin
+console.log("Slytherin:", wizards.findByHouse("Slytherin"));
+
+// Rechercher les sorciers de Ravenclaw
+console.log("Ravenclaw:", wizards.findByHouse("Ravenclaw"));
+
+// Tester une maison sans sorciers enregistrés
+console.log("Hufflepuff:", wizards.findByHouse("Hufflepuff"));

@@ -1,6 +1,8 @@
+
 import type { Wizard, Spell, NewWizard } from "./types";
 import { Log, MeasureTime } from "./decorators";
 
+// Repository générique du professeur
 export class Repository<T extends { id: number }> {
   private items: T[] = [];
 
@@ -28,34 +30,54 @@ export class Repository<T extends { id: number }> {
   }
 }
 
+// Repository des sorciers
 export class WizardRepository extends Repository<Wizard> {
 
-    // Méthode pour ajouter un nouveau sorcier
-    addWizard(newWizard: NewWizard): Wizard {
+  // =====================================
+  // EXERCICE 1 : ADD NEW WIZARD
+  // =====================================
 
-        // Le premier identifiant commence à 1
-        let nextId: number = 1;
+  // Ajouter un sorcier avec un ID automatique
+  addWizard(newWizard: NewWizard): Wizard {
 
-        // Parcourir tous les sorciers enregistrés
-        for (const wizard of this.getAll()) {
+    // Commencer avec un identifiant égal à 1
+    let nextId: number = 1;
 
-            // Trouver le prochain identifiant disponible
-            if (wizard.id >= nextId) {
-                nextId = wizard.id + 1;
-            }
-        }
+    // Parcourir les sorciers enregistrés
+    for (const wizard of this.getAll()) {
 
-        // Créer le nouveau sorcier avec son ID
-        const wizard: Wizard = {
-            ...newWizard,
-            id: nextId
-        };
-
-        // Enregistrer le sorcier
-        this.add(wizard);
-
-        // Retourner le sorcier créé
-        return wizard;
+      // Trouver le prochain identifiant disponible
+      if (wizard.id >= nextId) {
+        nextId = wizard.id + 1;
+      }
     }
+
+    // Créer le sorcier avec son identifiant
+    const wizard: Wizard = {
+      ...newWizard,
+      id: nextId
+    };
+
+    // Enregistrer le sorcier
+    this.add(wizard);
+
+    // Retourner le sorcier créé
+    return wizard;
+  }
+
+  // =====================================
+  // EXERCICE 2 : FIND WIZARDS BY HOUSE
+  // =====================================
+
+  // Rechercher les sorciers appartenant à une maison
+  findByHouse(house: Wizard["house"]): Wizard[] {
+
+    // Récupérer tous les sorciers et filtrer par maison
+    return this.getAll().filter(
+      wizard => wizard.house === house
+    );
+  }
 }
+
+// Repository des sorts
 export class SpellRepository extends Repository<Spell> {}
