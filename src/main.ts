@@ -15,6 +15,7 @@ import {
 
 import { WizardRepository, SpellRepository } from "./repository";
 import { Log } from "./decorators";
+import type { SpellCastEvent } from "./types";
 
 function isHouse(value: unknown): value is House {
   return (
@@ -216,3 +217,24 @@ console.log("Ravenclaw:", wizards.findByHouse("Ravenclaw"));
 
 // Tester une maison sans sorciers enregistrés
 console.log("Hufflepuff:", wizards.findByHouse("Hufflepuff"));
+// =====================================
+// EXERCICE 3 : SPELL CAST EVENT
+// =====================================
+
+// Fonction qui gère un événement de lancement de sort
+function handleSpellCast(event: SpellCastEvent): void {
+
+    // Afficher le sorcier et le sort utilisé
+    console.log(
+        `Wizard ${event.wizardId} cast ${event.spellName}`
+    );
+}
+
+// Tester la fonction avec un événement
+console.log("\n--- Exercise 3: Spell Cast Event ---");
+
+handleSpellCast({
+    type: "spell-cast",
+    wizardId: 1,
+    spellName: "Expelliarmus"
+});
