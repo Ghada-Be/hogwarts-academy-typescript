@@ -26,6 +26,31 @@ Après correction, les commandes `npm run typecheck` et `npm start` ont fonction
 
 J'ai mieux compris les Utility Types (`Pick`, `Omit`), l'héritage, `this`, les boucles `for...of` et le fonctionnement d'un repository.
 
-**Résultat :** Luna a bien été enregistrée avec l'ID 4. ✅
+**Résultat :** Luna a bien été enregistrée avec l'ID 4. 
 
 **Prochaine étape :** Exercice 2 — Filtrer les sorciers par maison.
+Ma démarche
+
+repository.ts : ajout de la méthode findByHouse() dans WizardRepository.
+
+Utilisation de getAll() pour récupérer les sorciers et de .filter() pour sélectionner ceux de la maison recherchée.
+
+main.ts : tests avec les quatre maisons.
+
+ Fonctionnement
+
+House → findByHouse() → getAll() → .filter() → Wizard[]
+
+ Mes difficultés
+
+Le point à comprendre était la fonction fléchée wizard => wizard.house === house et le fonctionnement de .filter().
+
+Les tests ont réussi, y compris pour Hufflepuff, qui retourne un tableau vide [] puisqu'aucun sorcier n'y est enregistré.
+
+ Ce que j'ai appris
+
+J'ai mieux compris les tableaux, les fonctions fléchées, .filter() et le type Wizard["house"].
+
+J'ai aussi retenu qu'une méthode qui retourne Wizard[] renvoie toujours un tableau, même lorsqu'un seul sorcier correspond.
+
+Résultat : Harry et Hermione pour Gryffindor, Draco pour Slytherin, Luna pour Ravenclaw et aucun sorcier pour Hufflepuff.
