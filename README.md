@@ -54,3 +54,31 @@ J'ai mieux compris les tableaux, les fonctions fléchées, .filter() et le type 
 J'ai aussi retenu qu'une méthode qui retourne Wizard[] renvoie toujours un tableau, même lorsqu'un seul sorcier correspond.
 
 Résultat : Harry et Hermione pour Gryffindor, Draco pour Slytherin, Luna pour Ravenclaw et aucun sorcier pour Hufflepuff.
+## Exercice 3 — Spell Cast Event
+
+**Objectif :** Gérer uniquement les événements de lancement de sorts à l'aide du Utility Type `Extract`.
+
+### Ma démarche
+
+- **`types.ts`** : création de `SpellCastEvent` avec `Extract` pour sélectionner uniquement les événements `spell-cast`.
+- **`main.ts`** : implémentation de la fonction `handleSpellCast()` pour afficher le sorcier et le sort lancé.
+- Test avec le sort `Expelliarmus`.
+
+### Fonctionnement
+
+`AcademyEvent` → `Extract` → `SpellCastEvent` → `handleSpellCast()`
+
+### Mes difficultés
+
+La principale notion à comprendre était la différence entre `Extract`, qui sélectionne des types, et `.filter()`, qui filtre des données.
+
+J'ai également rencontré un refus de `git push`, car le dépôt distant contenait des modifications à récupérer.
+
+### Ce que j'ai appris
+
+J'ai appris à manipuler les unions de types, à utiliser `Extract` et à définir des paramètres de fonctions plus stricts avec TypeScript.
+
+**Résultat :** `Wizard 1 cast Expelliarmus`
+
+La compilation et l'exécution ont réussi.
+
