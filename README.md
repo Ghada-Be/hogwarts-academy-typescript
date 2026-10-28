@@ -104,6 +104,35 @@ J'ai également découvert le fonctionnement de `throw new Error()` et de `try/c
 J'ai mieux compris les décorateurs, `override`, `super.add()` et la validation des données avant leur enregistrement.
 
 J'ai aussi appris qu'un décorateur peut modifier le comportement d'une méthode sans changer directement sa logique principale.
+## Exercice 5 — Cache Decorator
+
+**Objectif :** Éviter de refaire un calcul lorsque les mêmes paramètres ont déjà été utilisés, grâce à un décorateur de mise en cache.
+
+### Ma démarche
+
+- **`decorators.ts`** : création du décorateur `Cache` avec `Map` et `WeakMap` pour mémoriser les résultats.
+- **`main.ts`** : création de la classe `SpellCalculator` et de la méthode `calculatePower()` avec `@Cache`.
+- Tests avec plusieurs appels pour vérifier le fonctionnement du cache.
+
+### Fonctionnement
+
+`calculatePower()` → `@Cache` → Vérification des paramètres → `CACHE HIT` ou `CACHE MISS`
+
+### Mes difficultés
+
+La principale difficulté était de comprendre la différence entre `Map` et `WeakMap`, ainsi que l'utilisation de `cache.has()`, `cache.get()` et `cache.set()`.
+
+J'ai aussi dû comprendre pourquoi le message `Calculating...` ne s'affichait pas lors du deuxième appel.
+
+### Ce que j'ai appris
+
+J'ai compris comment un décorateur permet d'optimiser une méthode en réutilisant des résultats déjà calculés.
+
+- **CACHE MISS** : le résultat n'existe pas encore, donc le calcul est effectué et enregistré.
+- **CACHE HIT** : le résultat existe déjà, donc il est récupéré sans refaire le calcul.
+
+**Résultat :** Les trois appels retournent `30`, `30` et `10`, avec deux calculs réellement exécutés.
+
 
 **Résultat :** Le sort valide est enregistré, tandis que le sort de puissance négative est refusé. La recherche du sort invalide retourne `undefined`.
 
