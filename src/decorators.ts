@@ -93,3 +93,61 @@ export function ValidateSpellPower(
         return originalMethod.apply(this, args);
     };
 }
+
+ // =====================================
+ // EXERCICE 5 : CACHE DECORATOR
+ // =====================================
+
+ // Décorateur pour mémoriser les résultats
+ export function Cache(
+     target: object,
+     propertyKey: string | symbol,
+     descriptor: PropertyDescriptor
+ ): void {
+
+     // Sauvegarder la méthode originale
+     const originalMethod = descriptor.value as (
+         ...args: unknown[]
+     ) => unknown;
+
+     // Créer un cache pour chaque instance
+     const instanceCaches = new WeakMap<
+         object,
+         Map<string, unknown>
+     >();
+
+     // Remplacer la méthode par une version avec cache
+     descriptor.value = function (
+         this: object,
+         ...args: unknown[]
+     ): unknown {
+
+         // Récupérer le cache de l'instance
+         let cache = instanceCaches.get(this);
+
+         // Créer un cache s'il n'existe pas
+         if (!cache) {
+             cache = new Map<string, unknown>();
+             instanceCaches.set(this, cache);
+         }
+
+         // Transformer les arguments en clé
+         const key = JSON.stringify(args);
+
+         // Vérifier si le résultat existe déjà
+         if (cache.has(key)) {
+             console.log(`[CACHE HIT] ${String(propertyKey)}`);
+             return cache.get(key);
+         }
+
+         // Sinon, effectuer le calcul
+         console.log(`[CACHE MISS] ${String(propertyKey)}`);
+
+         const result = originalMethod.apply(this, args);
+
+         // Enregistrer le résultat
+         cache.set(key, result);
+
+         return result;
+     };
+ }

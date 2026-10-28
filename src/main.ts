@@ -14,7 +14,7 @@ import {
 } from "./types";
 
 import { WizardRepository, SpellRepository } from "./repository";
-import { Log } from "./decorators";
+import { Log, Cache } from "./decorators";
 import type { SpellCastEvent } from "./types";
 
 function isHouse(value: unknown): value is House {
@@ -271,3 +271,36 @@ try {
 // Vérifier si les sorts sont enregistrés
 console.log("Valid spell:", spells.findById(103));
 console.log("Invalid spell:", spells.findById(104));
+
+ // =====================================
+ // EXERCICE 5 : CACHE DECORATOR
+ // =====================================
+
+ console.log("\n--- Exercise 5: Cache Decorator ---");
+
+ // Classe pour calculer la puissance d'un sort
+ class SpellCalculator {
+
+     // Utiliser notre décorateur Cache
+     @Cache
+     calculatePower(basePower: number, multiplier: number): number {
+
+         // Message affiché uniquement si le calcul est effectué
+         console.log("Calculating...");
+
+         // Calculer et retourner la puissance
+         return basePower * multiplier;
+     }
+ }
+
+ // Créer un objet SpellCalculator
+ const calculator = new SpellCalculator();
+
+ // Premier appel : calcul effectué et résultat enregistré
+ console.log(calculator.calculatePower(10, 3));
+
+ // Deuxième appel : récupérer le résultat du cache
+ console.log(calculator.calculatePower(10, 3));
+
+ // Troisième appel : nouveaux paramètres, nouveau calcul
+ console.log(calculator.calculatePower(5, 2));
