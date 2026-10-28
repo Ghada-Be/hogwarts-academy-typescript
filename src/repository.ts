@@ -1,6 +1,6 @@
 
 import type { Wizard, Spell, NewWizard } from "./types";
-import { Log, MeasureTime } from "./decorators";
+import { Log, MeasureTime, ValidateSpellPower } from "./decorators";
 
 // Repository générique du professeur
 export class Repository<T extends { id: number }> {
@@ -79,5 +79,17 @@ export class WizardRepository extends Repository<Wizard> {
   }
 }
 
-// Repository des sorts
-export class SpellRepository extends Repository<Spell> {}
+// =====================================
+// EXERCICE 4 : VALIDATE SPELL POWER
+// =====================================
+
+export class SpellRepository extends Repository<Spell> {
+
+    // Vérifier la puissance avant d'ajouter un sort
+    @ValidateSpellPower
+    override add(spell: Spell): void {
+
+        // Appeler la méthode add() du Repository parent
+        super.add(spell);
+    }
+}

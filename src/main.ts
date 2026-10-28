@@ -238,3 +238,36 @@ handleSpellCast({
     wizardId: 1,
     spellName: "Expelliarmus"
 });
+// =====================================
+// EXERCICE 4 : VALIDATE SPELL POWER
+// =====================================
+
+console.log("\n--- Exercise 4: Validate Spell Power ---");
+
+// Test 1 : Ajouter un sort valide
+spells.add({
+    id: 103,
+    name: "Protego Maxima",
+    category: "defense",
+    power: 50
+});
+
+// Test 2 : Essayer d'ajouter un sort invalide
+try {
+    spells.add({
+        id: 104,
+        name: "Invalid Spell",
+        category: "attack",
+        power: -10
+    });
+} catch (error: unknown) {
+
+    // Afficher le message d'erreur
+    if (error instanceof Error) {
+        console.log("Spell refused:", error.message);
+    }
+}
+
+// Vérifier si les sorts sont enregistrés
+console.log("Valid spell:", spells.findById(103));
+console.log("Invalid spell:", spells.findById(104));
