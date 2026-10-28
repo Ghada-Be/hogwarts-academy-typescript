@@ -79,6 +79,34 @@ J'ai également rencontré un refus de `git push`, car le dépôt distant conten
 J'ai appris à manipuler les unions de types, à utiliser `Extract` et à définir des paramètres de fonctions plus stricts avec TypeScript.
 
 **Résultat :** `Wizard 1 cast Expelliarmus`
+## Exercice 4 — Validate Spell Power
+
+**Objectif :** Empêcher l'enregistrement d'un sort lorsque sa puissance est négative, en utilisant un décorateur TypeScript.
+
+### Ma démarche
+
+- **`decorators.ts`** : création du décorateur `ValidateSpellPower` pour vérifier la puissance avant l'enregistrement.
+- **`repository.ts`** : application de `@ValidateSpellPower` à la méthode `add()` de `SpellRepository`.
+- **`main.ts`** : tests avec un sort valide (`power: 50`) et un sort invalide (`power: -10`).
+
+### Fonctionnement
+
+`spells.add()` → `@ValidateSpellPower` → Vérification de `power` → Enregistrement ou erreur.
+
+### Mes difficultés
+
+J'ai rencontré une erreur `TS2305` car TypeScript ne reconnaissait pas l'exportation du décorateur dans `decorators.ts`.
+
+J'ai également découvert le fonctionnement de `throw new Error()` et de `try/catch` pour intercepter une erreur sans interrompre tout le programme.
+
+### Ce que j'ai appris
+
+J'ai mieux compris les décorateurs, `override`, `super.add()` et la validation des données avant leur enregistrement.
+
+J'ai aussi appris qu'un décorateur peut modifier le comportement d'une méthode sans changer directement sa logique principale.
+
+**Résultat :** Le sort valide est enregistré, tandis que le sort de puissance négative est refusé. La recherche du sort invalide retourne `undefined`.
+
 
 La compilation et l'exécution ont réussi.
 
